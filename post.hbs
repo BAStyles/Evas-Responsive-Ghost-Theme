@@ -1,0 +1,111 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+<main class="content" role="main">
+<header class="site-head">
+    <div class="vertical">
+        <div class="site-head-content inner">
+           {{#if @blog.logo}}<a class="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}}
+            <h1 class="blog-title animated flash">{{@blog.title}}</h1>
+            <h2 class="blog-description">{{@blog.description}}</h2>
+        </div>
+        <nav class="cover-navigation navigation--social">
+              <ul class="navigation">
+
+
+              <!-- Twitter -->
+              <li class="navigation__item ">
+                <a href="https://twitter.com/BAStyles1" title="@BAStyles1 on Twitter">
+                  <i class='icon icon-social-twitter animated tada'></i>
+                </a>
+              </li>
+
+                <!-- Facebook -->
+                <li class="navigation__item animated tada">
+                  <a href="https://www.facebook.com/BAStyles1" title="BAStyles on Facebook">
+                    <i class='icon icon-social-facebook'></i>
+                  </a>
+                </li>
+
+                <!-- Email -->
+                <li class="navigation__item animated tada">
+                  <a href="mailto:aleksandar.balaneskovic93@gmail.com" title="Email aleksandar.balaneskovic93@gmail.com">
+                    <i class='icon icon-mail'></i>
+                  </a>
+                </li>
+
+              </ul>
+    </nav>
+    </div>
+    
+</header>
+    <article class="{{post_class}} animated bounceInDown">
+
+      
+
+        {{! Everything inside the #post tags pulls data from the post }}
+        {{#post}}
+
+            
+
+            <h1 class="post-title ">{{{title}}}<span class="post-meta"><time datetime="{{date format="YYYY-MM-DD"}}">{{date format='DD MMM YYYY'}}</time></span></h1>
+
+            <section class="single-post-content">
+                {{content}}
+                <div class="tags">
+                            <span title="{{tags prefix="Tags:"}}">{{tags prefix="Tags: "}}</span>
+                        </div>
+            </section>
+
+            <footer class="post-footer">
+            
+                <section class="author">
+                <div class="author-dsc">The Author</div>
+                <div class="author-image"><img src="{{author.image}}"></div>
+                <div class="author-description">
+                    <h4 class="author-name">{{author.name}}</h4>
+                    <a href="{{author.website}}"><div class="website"></div>{{author.website}}</a>
+                    <p class="author-location"><div class="location"></div>{{author.location}}</p>
+                    <p class="author-bio">{{author.bio characters="15"}}&hellip;</p>
+                    </div>
+                </section>
+
+                <section class="share">
+                    <h4>Share this post</h4>
+                    <a class="icon-twitter animated shake" href="http://twitter.com/share?text={{encode title}}&url={{url absolute="true"}}"
+                        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                        <span class="hidden">Twitter</span>
+                    </a>
+                    <a class="icon-facebook animated shake" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}"
+                        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                        <span class="hidden">Facebook</span>
+                    </a>
+                    <a class="icon-google-plus animated shake" href="https://plus.google.com/share?url={{url absolute="true"}}"
+                       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                        <span class="hidden">Google+</span>
+                    </a>
+                </section>
+            </footer>
+            {{/post}}
+    </article>
+     <div class=post-ct>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'Bukovce'; // required: replace example with your forum shortname
+                var disqus_identifier = '{{post.id}}'; // make sure to use the post.id as an identifier, otherwise disqus will use the pages url per default, which might be problematic...
+                var disqus_url = "http://bukovce1.disqus.com/";
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+
+</main>
